@@ -1,15 +1,17 @@
+
 pipeline {
     agent any
 
     stages {
-        stage('Test') {
+       stage('Test') {
             agent {
                 docker {
-                    image 'maven:3.8.6-openjdk-11-slim'
+                image 'python:3.6-slim'
                 }
             }
             steps {
-                sh 'mvn test'
+                sh 'pip install pytest'// Instalamos pytest dentro del contenedor Docker
+                sh 'pytest'
             }
         }
     }
