@@ -1,12 +1,16 @@
 pipeline {
-  agent any
+    agent any
 
-  stages {
-     stage('Ejercicio 1') {
+    stages {
+        stage('Test') {
+            agent {
+                docker {
+                    image 'maven:3.8.6-openjdk-11-slim'
+                }
+            }
             steps {
-                 echo "Job: ${env.JOB_NAME}"
-                echo "Branch: ${env.BRANCH_NAME}"
+                sh 'mvn test'
             }
         }
-  }
+    }
 }
